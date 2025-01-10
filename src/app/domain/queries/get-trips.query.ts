@@ -7,5 +7,5 @@ import { TripFiltersVO } from '@domain/value-objects';
 export class GetTripsQuery extends createQuery({
   name: 'get-trips',
   in: props<{ filters: TripFiltersVO }>(),
-  out: out<Trip[]>(),
+  out: out<{ items: Trip[]; total: number; page: number; limit: number }>(),
 }) {}

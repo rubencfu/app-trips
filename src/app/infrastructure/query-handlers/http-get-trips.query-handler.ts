@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/h
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
-import { createQueryHandler } from '@building-blocks/domain';
+import { GetOutput, createQueryHandler } from '@building-blocks/domain';
 
 import { environment } from 'src/environments/environment';
 
@@ -16,15 +16,18 @@ export class HttpGetTripsQueryHandler extends createQueryHandler(GetTripsQuery) 
     super();
   }
 
-  async handle({ filters }: GetTripsQuery): Promise<Trip[]> {
+  async handle({ filters }: GetTripsQuery): Promise<GetOutput<GetTripsQuery>> {
     const primitiveFilters = filters.toPrimitives();
 
     try {
-      const trips = await firstValueFrom(
-        this.http.get<Trip[]>(`${environment.SERVER}/v1/trips`, { params: primitiveFilters })
+      const response = await firstValueFrom(
+        this.http.get<{ items: Trip[]; total: number; page: number; limit: number }>(
+          `${environment.SERVER}/v1/trips`,
+          { params: primitiveFilters }
+        )
       );
 
-      return trips;
+      return response;
     } catch (error: unknown) {
       if (error instanceof HttpErrorResponse) {
         if (error.status === HttpStatusCode.NotFound) {
