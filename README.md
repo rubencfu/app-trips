@@ -1,59 +1,21 @@
 # AppTrips
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+Here I will leave some notes that may be useful about why I used some things:
 
-## Development server
+## What is Shared Kernel?
 
-To start a local development server, run:
+Shared kernel are simple types or utilities that are language-related and can be used anywhere, mainly typescript types that will be used on building blocks
 
-```bash
-ng serve
-```
+## What are Building Blocks?
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Building blocks is a concept where an application is treated as a building. When you want to build something, you need bricks, or pieces.
+It is the same thing, I have building blocks that can be used in any typescript project and can be a good base for any app.
 
-## Code scaffolding
+For example I have basic abstractions of services, custom exceptions, functions, etc... Also the most important things are Value Objects (as they will simplify a lot the validation work) and the Query system (based on cqrs architecture, I also have a Command system that is simply not needed on this project)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Use cases and services can live along queries and can be implemented easily.
 
-```bash
-ng generate component component-name
-```
+## If This is DDD architecture, why there is not an Application layer?
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Well, as DDD is not meant for frontend, and widely used in different forms, is something almost subjective.
+I think it makes more sense to unify domain and application in frontend, and create an extra layer called UI or Views, that is where the framework truly resides.
