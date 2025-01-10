@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -16,9 +17,20 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "paths": {
+      "@domain/*": ["src/app/domain/*"],
+      "@shared-kernel/*": ["src/app/libs/shared-kernel/*"],
+      "@building-blocks/*": ["src/app/libs/building-blocks/*"]
+    }
   },
   "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "interpolatedSignalNotInvoked": "error"
+      }
+    },
+    "fullTemplateTypeCheck": true,
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
