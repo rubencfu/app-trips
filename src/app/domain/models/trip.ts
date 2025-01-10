@@ -13,8 +13,10 @@ export interface Trip {
   creationDate: string;
 }
 
+export type TripSortByOptions = 'title' | 'price' | 'rating' | 'creationDate';
+
 export interface TripFilters {
-  sortBy: 'title' | 'price' | 'rating' | 'creationDate';
+  sortBy: TripSortByOptions;
   sortOrder: 'ASC' | 'DESC';
   titleFilter: string;
   minPrice: number;
