@@ -12,3 +12,15 @@ export interface Trip {
   imageUrl: string;
   creationDate: string;
 }
+
+export interface TripFilters {
+  sortBy: 'title' | 'price' | 'rating' | 'creationDate';
+  sortOrder: 'ASC' | 'DESC';
+  titleFilter: string;
+  minPrice: number;
+  maxPrice: number;
+  minRating: number;
+  tags: string;
+  page: number;
+  limit: number;
+}
