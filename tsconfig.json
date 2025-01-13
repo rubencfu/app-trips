@@ -20,6 +20,7 @@
     "module": "ES2022",
     "paths": {
       "@domain/*": ["src/app/domain/*"],
+      "@shared/*": ["src/app/shared/*"],
       "@shared-kernel/*": ["src/app/libs/shared-kernel/*"],
       "@building-blocks/*": ["src/app/libs/building-blocks/*"]
     }
