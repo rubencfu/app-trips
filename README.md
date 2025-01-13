@@ -2,6 +2,10 @@
 
 Here I will leave some notes that may be useful about why I used some things:
 
+## Issues found
+
+- Tags filtering is not working, backend output is 500 internal server error. (tried string and array, communicate with the backend team)
+
 ## What is Shared Kernel?
 
 Shared kernel are simple types or utilities that are language-related and can be used anywhere, mainly typescript types that will be used on building blocks
@@ -19,3 +23,14 @@ Use cases and services can live along queries and can be implemented easily.
 
 Well, as DDD is not meant for frontend, and widely used in different forms, is something almost subjective.
 I think it makes more sense to unify domain and application in frontend, and create an extra layer called UI or Views, that is where the framework truly resides.
+
+## Another possible DDD Aproach
+
+Another option is to isolate each view in its own Domain and Infrastructure, this means that every view would have its models, services and implementations.
+This way, we assure the application to not spread bugs, or to migrate easily to other frameworks or micro-frontends, but code redundance would be bigger.
+
+## Some VSCode Plugins Recommendations
+
+- Angular Language Service
+- Prettier
+- Tailwind CSS IntelliSense

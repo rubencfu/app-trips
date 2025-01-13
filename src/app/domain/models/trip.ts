@@ -13,6 +13,11 @@ export interface Trip {
   creationDate: string;
 }
 
+// We create a model that will be only used in frontend, as score is frontend-calculated (should score be calculated in backend?)
+export interface FrontendTrip extends Trip {
+  score: 'average' | 'good' | 'awesome';
+}
+
 export type TripSortByOptions = 'title' | 'price' | 'rating' | 'creationDate';
 
 export interface TripFilters {

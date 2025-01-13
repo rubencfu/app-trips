@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 
 import { NotFoundError } from '@domain/exceptions';
 import { GetTripsQuery } from '@domain/queries';
-import { Trip } from '@domain/models';
+import { Trip, TripFilters } from '@domain/models';
 
 @Injectable()
 export class HttpGetTripsQueryHandler extends createQueryHandler(GetTripsQuery) {
@@ -19,11 +19,18 @@ export class HttpGetTripsQueryHandler extends createQueryHandler(GetTripsQuery) 
   async handle({ filters }: GetTripsQuery): Promise<GetOutput<GetTripsQuery>> {
     const primitiveFilters = filters.toPrimitives();
 
+    // We create a HttpParams object and prevent undefined params to be sent
+    const fixedParams = Object.keys(primitiveFilters).reduce((httpParams, key) => {
+      const param = primitiveFilters[key as keyof TripFilters];
+
+      return param ? httpParams.append(key, param) : httpParams;
+    }, new HttpParams());
+
     try {
       const response = await firstValueFrom(
         this.http.get<{ items: Trip[]; total: number; page: number; limit: number }>(
           `${environment.SERVER}/v1/trips`,
-          { params: primitiveFilters }
+          { params: fixedParams }
         )
       );
 

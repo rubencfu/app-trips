@@ -1,0 +1,93 @@
+<div class="filters-container rounded-md border border-primary shadow-md">
+  <section class="filters-section p-3 border-b border-primary">
+    <span class="font-semibold text-xl">Filter by:</span>
+  </section>
+  <form (change)="onFormValueChange()" [formGroup]="filtersForm">
+    <section class="filters-section p-3 border-b border-primary">
+      <span class="font-semibold">Sort</span>
+      <div class="flex gap-2">
+        <div class="w-full">
+          <app-dropdown
+            (ngModelChange)="onFormValueChange()"
+            formControlName="sortBy"
+            [data]="sortByDropdown"
+          ></app-dropdown>
+        </div>
+        <button
+          type="button"
+          (click)="toggleOrder()"
+          aria-label="Order"
+          class="order-button border rounded-md border-primary p-1 hover:bg-slate-100"
+        >
+          @if (appStore.filters().sortOrder === 'DESC') {
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path
+                d="m18.707 12.707-1.414-1.414L13 15.586V6h-2v9.586l-4.293-4.293-1.414 1.414L12 19.414z"
+              ></path>
+            </svg>
+          } @else {
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path
+                d="M11 8.414V18h2V8.414l4.293 4.293 1.414-1.414L12 4.586l-6.707 6.707 1.414 1.414z"
+              ></path>
+            </svg>
+          }
+        </button>
+      </div>
+    </section>
+    <section class="filters-section p-3 border-b border-primary">
+      <span class="font-semibold">Price</span>
+      <div class="mt-2">
+        <app-double-range-slider
+          [min]="0"
+          [max]="10000"
+          formControlName="price"
+        ></app-double-range-slider>
+      </div>
+    </section>
+    <section class="filters-section p-3 border-b border-primary">
+      <span class="font-semibold">Title</span>
+      <input
+        class="update-input w-full hover:bg-slate-100 transition border border-primary shadow-sm py-1 px-2 rounded-md text-base"
+        formControlName="titleFilter"
+        id="title"
+        placeholder="Search trip by title"
+      />
+    </section>
+    <section class="filters-section p-3 border-b border-primary flex flex-col">
+      <span class="font-semibold">Min. Rating</span>
+      <span>{{ appStore.filters().minRating || 0 }} Stars</span>
+      <input
+        class="w-full accent-primary"
+        type="range"
+        formControlName="minRating"
+        min="0"
+        max="5"
+      />
+      <div class="flex w-full justify-between">
+        <span class="text-sm">0</span>
+        <span class="text-sm">5</span>
+      </div>
+    </section>
+    <section class="filters-section p-3 border-b border-primary flex items-center justify-between">
+      <span class="font-semibold">Items per Page</span>
+      <!--We can control this input so no huge numbers are sent (is backend controlling huge numbers?)-->
+      <input
+        class="update-input w-20 hover:bg-slate-100 transition border border-primary shadow-sm py-1 px-2 rounded-md text-base"
+        formControlName="limit"
+        id="limit"
+        type="number"
+        max="50"
+      />
+    </section>
+    <section class="filters-section p-3 border-b border-primary">
+      <span class="font-semibold">Tags</span>
+      <input
+        class="update-input w-full hover:bg-slate-100 transition border border-primary shadow-sm py-1 px-2 rounded-md text-base"
+        formControlName="tags"
+        id="tags"
+        placeholder="Search by tags, sepparated by comma"
+      />
+    </section>
+  </form>
+</div>
