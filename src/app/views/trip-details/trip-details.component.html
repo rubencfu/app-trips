@@ -1,0 +1,64 @@
+<div class="trip-background pb-14">
+  <!--Signals as functions are probably a bad design decision... There are multiple problems like undefined handling-->
+  @let trip = store.trip();
+  <div class="navigation w-[1000px] m-auto flex gap-2 mb-3">
+    <a class="underline hover:text-primary" [routerLink]="['/home']">Home</a>
+    <span>></span>
+    @if (store.state() === 'loading') {
+      <span>Loading...</span>
+    } @else {
+      <span>{{ trip.title }}</span>
+    }
+  </div>
+  @if (store.state() === 'loading') {
+    <div
+      class="w-[1000px] h-[730px] m-auto rounded-md animate-pulse bg-gray-300 dark:bg-gray-600"
+    ></div>
+  }
+  @if (trip.title) {
+    <div class="trip-container rounded-md w-[1000px] border border-primary m-auto shadow-md">
+      <div class="trip-name border-b border-primary p-3">
+        <h1 class="font-medium text-3xl text-primary">{{ trip.title }}</h1>
+      </div>
+      <div class="trip-info flex">
+        <img alt="trip image" width="500" height="700" priority="" [ngSrc]="trip.imageUrl" />
+        <div class="p-4">
+          <div class="mb-2">{{ trip.description }}</div>
+          <div class="column flex flex-col gap-2">
+            <span class="font-medium text-2xl w-fit bg-slate-100 rounded-md p-2">{{
+              trip.price | currency: localeCurrencies[locale]
+            }}</span>
+            <div class="flex items-center gap-2 mb-2">
+              <app-star-rating [rating]="trip.rating"></app-star-rating
+              ><span class="text-slate-500">{{ trip.nrOfRatings }} ratings</span>
+            </div>
+            <!--Score badge-->
+            <span
+              [ngClass]="scoreProperties[trip.score].color"
+              class="py-1 px-3 rounded-full text-white font-medium w-fit"
+              >{{ scoreProperties[trip.score].text }}</span
+            >
+            <div class="rounded-md shadow-sm p-2 bg-slate-50">
+              <div>
+                <span class="font-medium">CO2: </span
+                ><span class="text-slate-500">{{ trip.co2 }}</span>
+              </div>
+              <div>
+                <span class="font-medium">Created: </span
+                ><span class="text-slate-500">{{ trip.creationDate | date }}</span>
+              </div>
+              <div>
+                <span class="font-medium">Vertical Type: </span
+                ><span class="text-slate-500">{{ trip.verticalType }}</span>
+              </div>
+              <div>
+                <span class="font-medium">Tags: </span
+                ><span class="text-slate-500">{{ trip.tags }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
