@@ -62,10 +62,14 @@ export class HomePageComponent {
 
   // As home is the parent component, it has the responsability to sync params and store [route=home]
   checkQueryParams(params: Params) {
-    const page = Number(params['page']);
+    const page = Number(params['page']) || 1;
 
     // We check the query params, we merge the url query params with the store, as url has priority
-    this.appStore.patchFilters({ ...params, limit: Number(params['limit'] || 10) });
+    this.appStore.patchFilters({
+      ...params,
+      page,
+      limit: Number(params['limit'] || 10),
+    });
     this.store.setPage(page);
 
     // Then we sync store with url params

@@ -1,6 +1,13 @@
 <div class="filters-container rounded-md border border-primary shadow-md">
-  <section class="filters-section p-3 border-b border-primary">
+  <section class="filters-section flex justify-between items-center p-3 border-b border-primary">
     <span class="font-semibold text-xl">Filter by:</span>
+    <button
+      (click)="resetFilters()"
+      type="button"
+      class="text-white uppercase bg-primary rounded-md font-medium px-2 py-1 hover:bg-primary-hover transition"
+    >
+      Reset
+    </button>
   </section>
   <form (change)="onFormValueChange()" [formGroup]="filtersForm">
     <section class="filters-section p-3 border-b border-primary">
@@ -8,7 +15,7 @@
       <div class="flex gap-2">
         <div class="w-full">
           <app-dropdown
-            (ngModelChange)="onFormValueChange()"
+            (valueManuallyChanged)="onFormValueChange()"
             formControlName="sortBy"
             [data]="sortByDropdown"
           ></app-dropdown>

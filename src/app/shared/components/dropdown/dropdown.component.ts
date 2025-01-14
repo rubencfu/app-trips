@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, forwardRef, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  forwardRef,
+  input,
+  output,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Nullish } from '@shared-kernel/types';
@@ -56,10 +63,11 @@ type DropdownItem = { label: string; value: string | number };
 })
 export class DropdownComponent implements ControlValueAccessor {
   placeholder = input<string>('Select option');
+  valueManuallyChanged = output<void>();
 
   data = input.required<DropdownItem[]>();
 
-  value?: Nullish<string | number> = undefined;
+  value: string | number = 'default';
   selectedLabel?: Nullish<string> = undefined;
 
   isOpen = false;
@@ -80,6 +88,7 @@ export class DropdownComponent implements ControlValueAccessor {
     this.selectedLabel = item.label;
     this.onChange(item.value);
     this.onTouched();
+    this.valueManuallyChanged.emit();
     this.close();
   }
 
@@ -100,7 +109,7 @@ export class DropdownComponent implements ControlValueAccessor {
     this.selectedLabel = this.data().find((i) => i.value === value)?.label;
   }
 
-  registerOnChange(onChange: (selectedLabel: string | number) => void) {
+  registerOnChange(onChange: (value: string | number) => void) {
     this.onChange = onChange;
   }
 

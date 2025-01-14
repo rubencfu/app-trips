@@ -7,8 +7,9 @@ import { Nullish } from '@shared-kernel/types';
 import { AppStore } from '@shared/state/app.store';
 
 import { NonEmptyString, PositiveNumber, TripFiltersVO } from '@domain/value-objects';
+import { getTripScore } from '@domain/functions';
 import { GetTripsQuery } from '@domain/queries';
-import { FrontendTrip, Trip } from '@domain/models';
+import { FrontendTrip } from '@domain/models';
 
 // This will act as a view model of the page
 export interface HomePageState {
@@ -82,40 +83,6 @@ export const HomePageStore = signalStore(
     },
   }))
 );
-
-/* Note for badges: (personal approach, open to debate)
-    CO2: Average >= 600 ; good < 600 ; awesome <= 100
-    rating: Average  <= 2.5 ; good > 2.5 ; awesome >= 4
-    nrOfRatings: Average <= 150 ; good > 150 ; awesome > 500
-  */
-
-// We calculate every field individually, then we do a weighted average and tweak a bit the result so good + good + awesome = awesome
-function getTripScore({ co2, rating, nrOfRatings }: Trip): 'average' | 'good' | 'awesome' {
-  const co2Score = co2 >= 600 ? 'average' : co2 < 100 ? 'awesome' : 'good';
-
-  const ratingScore = rating <= 2.5 ? 'average' : rating > 4 ? 'awesome' : 'good';
-
-  const nrOfRatingsScore = nrOfRatings <= 150 ? 'average' : nrOfRatings > 500 ? 'awesome' : 'good';
-
-  const points = {
-    average: 1,
-    good: 2,
-    awesome: 3,
-  } as const;
-
-  const totalPointsAverage =
-    (points[co2Score] + points[ratingScore] + points[nrOfRatingsScore]) / 3;
-
-  if (totalPointsAverage >= 2.3) {
-    return 'awesome';
-  }
-
-  if (totalPointsAverage >= 1.6) {
-    return 'good';
-  }
-
-  return 'average';
-}
 
 function getPositiveNumberValueObject(value: Nullish<number>) {
   return value ? new PositiveNumber({ value }) : undefined;

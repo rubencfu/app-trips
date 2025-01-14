@@ -1,9 +1,4 @@
 <div class="home-background h-full">
-  <header class="p-5">
-    <h1 class="py-5 text-5xl font-semibold uppercase flex justify-center text-primary">
-      App Trips
-    </h1>
-  </header>
   <div class="home-container pb-10 flex w-[1400] m-auto justify-center gap-4">
     <div class="filters-container w-72">
       <app-trip-filters (onFilterChange)="fetchTrips()"></app-trip-filters>
@@ -18,7 +13,10 @@
         }
       } @else {
         @for (trip of store.trips(); track trip.id; let i = $index) {
-          <div class="trip relative shadow-md border-primary border rounded-md flex w-[700px]">
+          <div
+            [routerLink]="['/trips', trip.id]"
+            class="trip relative shadow-md border-primary border rounded-md flex w-[700px]"
+          >
             <!--Score badge-->
             <span
               [ngClass]="scoreProperties[trip.score].color"
@@ -35,7 +33,9 @@
             />
             <div class="trip-information w-full flex flex-col justify-between">
               <div class="p-3">
-                <h2 class="text-2xl">{{ trip.title }}</h2>
+                <a [routerLink]="['/trips', trip.id]">
+                  <h2 class="text-2xl hover:text-primary">{{ trip.title }}</h2>
+                </a>
                 <app-star-rating [starSize]="18" [rating]="trip.rating"></app-star-rating>
               </div>
               <div class="trip-price p-3 flex justify-between bg-primary-opacity items-center">
@@ -43,6 +43,7 @@
                   trip.price | currency: localeCurrencies[locale]
                 }}</span>
                 <button
+                  [routerLink]="['/trips', trip.id]"
                   class="text-white bg-primary rounded-md font-medium px-3 py-2 hover:bg-primary-hover transition"
                 >
                   View >

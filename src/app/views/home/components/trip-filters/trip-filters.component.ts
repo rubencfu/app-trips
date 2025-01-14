@@ -73,7 +73,6 @@ export class TripFiltersComponent {
     });
   }
 
-  // Only user form changes, not changes from code
   onFormValueChange() {
     const formValue = this.filtersForm.getRawValue();
 
@@ -112,19 +111,10 @@ export class TripFiltersComponent {
   }
 
   resetFilters() {
-    //this.filtersForm.reset();
-
-    this.filtersForm.patchValue({
-      limit: 10,
-      price: { min: 0, max: 10_000 },
-      minRating: 0,
-      sortBy: 'creationDate',
-      sortOrder: 'DESC',
-      tags: '',
-      titleFilter: '',
-    });
     this.appStore.resetFilters();
 
-    this.updateParams();
+    this.filtersForm.reset({}, { emitEvent: false });
+
+    this.onFormValueChange();
   }
 }

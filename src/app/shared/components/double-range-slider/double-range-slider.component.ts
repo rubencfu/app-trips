@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   LOCALE_ID,
   OnInit,
@@ -151,6 +152,7 @@ export class DoubleRangeSliderComponent implements ControlValueAccessor, OnInit 
   protected sliderBackground = '';
 
   protected readonly locale = inject(LOCALE_ID);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.slideOne();
@@ -192,6 +194,7 @@ export class DoubleRangeSliderComponent implements ControlValueAccessor, OnInit 
     this.minInput.setValue(value.min);
     this.maxInput.setValue(value.max);
     this.fillColor();
+    this.cdr.detectChanges();
   }
 
   registerOnChange(onChange: (value: { min: number; max: number }) => void) {
