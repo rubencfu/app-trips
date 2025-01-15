@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, inject, LOCALE_ID } from '@angular/
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
-import { HttpGetTripQueryHandler } from 'src/app/infrastructure/query-handlers/http-get-trip.query-handler';
+import { HttpGetTripQueryHandler } from 'src/app/infrastructure/query-handlers';
 import { registerQueryHandlers } from 'src/app/infrastructure/cqrs.module';
 
 import { StarRatingComponent } from '@shared/components/star-rating/star-rating.component';

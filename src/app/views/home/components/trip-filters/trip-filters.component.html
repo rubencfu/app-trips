@@ -14,11 +14,25 @@
       <span class="font-semibold">Sort</span>
       <div class="flex gap-2">
         <div class="w-full">
-          <app-dropdown
-            (valueManuallyChanged)="onFormValueChange()"
-            formControlName="sortBy"
-            [data]="sortByDropdown"
-          ></app-dropdown>
+          <!--Example of how we can use defer to save bundle size, this one saves 18KBs of first load (without compression)-->
+          @defer (on hover) {
+            <app-dropdown
+              (valueManuallyChanged)="onFormValueChange()"
+              formControlName="sortBy"
+              [data]="sortByDropdown"
+            ></app-dropdown>
+          } @placeholder {
+            <div
+              class="dropdown-input hover:bg-slate-100 transition border border-primary shadow-sm py-1 px-2 rounded-md flex items-center justify-between text-base"
+            >
+              <span>Creation Date</span>
+              <svg width="22" height="22" viewBox="0 0 24 24">
+                <path
+                  d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                ></path>
+              </svg>
+            </div>
+          }
         </div>
         <button
           type="button"
@@ -57,6 +71,7 @@
       <input
         class="update-input w-full hover:bg-slate-100 transition border border-primary shadow-sm py-1 px-2 rounded-md text-base"
         formControlName="titleFilter"
+        aria-label="title"
         id="title"
         placeholder="Search trip by title"
       />
@@ -68,6 +83,7 @@
         class="w-full accent-primary"
         type="range"
         formControlName="minRating"
+        aria-label="min rating"
         min="0"
         max="5"
       />
@@ -84,6 +100,7 @@
         formControlName="limit"
         id="limit"
         type="number"
+        aria-label="number of items to show"
         max="50"
       />
     </section>
@@ -93,6 +110,7 @@
         class="update-input w-full hover:bg-slate-100 transition border border-primary shadow-sm py-1 px-2 rounded-md text-base"
         formControlName="tags"
         id="tags"
+        aria-label="tags input"
         placeholder="Search by tags, sepparated by comma"
       />
     </section>
