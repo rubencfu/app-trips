@@ -21,7 +21,7 @@ export class TripFiltersVO
   extends ValueObject<Partial<TripFiltersProps>>
   implements Serializable<Partial<TripFilters>>
 {
-  private declare unique: void;
+  declare private unique: void;
 
   constructor(props: Partial<TripFiltersProps>) {
     super(props);
@@ -37,7 +37,7 @@ export class TripFiltersVO
       invariant('sortOrder should be ASC or DESC', ['ASC', 'DESC'].includes(props.sortOrder));
     }
 
-    //If there is max tags or some tag related validation, it could be done here
+    //If there is max tags or some other validations, it can be done here
   }
 
   toPrimitives(): Partial<TripFilters> {

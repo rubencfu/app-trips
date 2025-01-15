@@ -10,6 +10,7 @@ import { AppStore } from '@shared/state/app.store';
 
 import { NotFoundError } from '@domain/exceptions';
 
+import { TripOfTheDayComponent } from './components/trip-of-the-day/trip-of-the-day.component';
 import { TripFiltersComponent } from './components/trip-filters/trip-filters.component';
 import { HomePageStore } from './home.store';
 
@@ -22,6 +23,7 @@ import { HomePageStore } from './home.store';
     NgOptimizedImage,
     StarRatingComponent,
     TripFiltersComponent,
+    TripOfTheDayComponent,
   ],
   providers: [HomePageStore, registerQueryHandlers([HttpGetTripsQueryHandler])],
   styles: `

@@ -1,4 +1,9 @@
 <div class="home-background h-full">
+  <div class="m-auto w-[1000px] mb-4 flex justify-center flex-col items-center">
+    <span class="font-medium mb-2 text-xl">Trip of The Day</span>
+    <app-trip-of-the-day></app-trip-of-the-day>
+    <hr class="border-primary w-full mt-4" />
+  </div>
   <div class="home-container pb-10 flex w-[1400] m-auto justify-center gap-4">
     <div class="filters-container w-72">
       <app-trip-filters (onFilterChange)="fetchTrips()"></app-trip-filters>
