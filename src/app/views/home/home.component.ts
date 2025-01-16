@@ -42,7 +42,7 @@ export class HomePageComponent {
   private readonly location = inject(Location);
   private readonly router = inject(Router);
 
-  // If we want more countries for our app, we should pass this object to a Global Constant and add more countries with their currencies
+  // If we want more countries for our app, we should pass this object to a Global Constant and add more countries with their currencies (and istall i18n)
   protected readonly localeCurrencies: Record<string, string> = {
     'en-Us': 'USD',
     es: 'EUR',
