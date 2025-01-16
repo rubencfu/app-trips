@@ -33,6 +33,11 @@ This way, we assure the application to not spread bugs, or to migrate easily to 
 
 The app is fully prepared to install i18n package and start localizing the app, I even prepared objects to use locale data and pipes.
 
+## About Zoneless Change Detection
+
+I am very interested in this feature Angular provides in modern versions, however, it is still in experimental state and it has to be used with caution. I did not use it on this project because jasmine need zone.js for some configurations or methods like fakeAsync.
+Anyway, we have to keep an eye on this feature, as it is likely the future of Angular and the zone.js library will be deprecated in the future
+
 ## Some VSCode Plugins Recommendations
 
 - Angular Language Service
