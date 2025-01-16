@@ -29,6 +29,10 @@ I think it makes more sense to unify domain and application in frontend, and cre
 Another option is to isolate each view in its own Domain and Infrastructure, this means that every view would have its models, services and implementations.
 This way, we assure the application to not spread bugs, or to migrate easily to other frameworks or micro-frontends, but code redundance would be bigger.
 
+## About users from different countries
+
+The app is fully prepared to install i18n package and start localizing the app, I even prepared objects to use locale data and pipes.
+
 ## Some VSCode Plugins Recommendations
 
 - Angular Language Service

@@ -11,7 +11,7 @@
   >
     <button
       (click)="fetchTripOfTheDay()"
-      class="w-3/4 p-3 bg-primary text-white rounded-md hover:bg-primary-hover"
+      class="w-3/4 p-3 bg-primary text-white trip-of-the-day-button rounded-md hover:bg-primary-hover"
     >
       Click to reveal trip of the day!
     </button>
@@ -21,7 +21,7 @@
 @if (trip && state === 'idle') {
   <div
     [routerLink]="['/trips', trip.id]"
-    class="trip relative shadow-md border-primary border rounded-md flex w-[700px]"
+    class="trip trip-of-the-day relative shadow-md border-primary border rounded-md flex w-[700px]"
   >
     <!--Score badge-->
     <span

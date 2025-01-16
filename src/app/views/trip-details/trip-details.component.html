@@ -25,7 +25,7 @@
         <div class="p-4">
           <div class="mb-2">{{ trip.description }}</div>
           <div class="column flex flex-col gap-2">
-            <span class="font-medium text-2xl w-fit bg-slate-100 rounded-md p-2">{{
+            <span class="price font-medium text-2xl w-fit bg-slate-100 rounded-md p-2">{{
               trip.price | currency: localeCurrencies[locale]
             }}</span>
             <div class="flex items-center gap-2 mb-2">
@@ -35,10 +35,10 @@
             <!--Score badge-->
             <span
               [ngClass]="scoreProperties[trip.score].color"
-              class="py-1 px-3 rounded-full text-white font-medium w-fit"
+              class="py-1 px-3 score-badge rounded-full text-white font-medium w-fit"
               >{{ scoreProperties[trip.score].text }}</span
             >
-            <div class="rounded-md shadow-sm p-2 bg-slate-50">
+            <div class="rounded-md trip-other shadow-sm p-2 bg-slate-50">
               <div>
                 <span class="font-medium">CO2: </span
                 ><span class="text-slate-500">{{ trip.co2 }}</span>

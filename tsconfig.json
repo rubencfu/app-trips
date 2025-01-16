@@ -2,6 +2,9 @@
 /* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
+  // Issue: https://github.com/cypress-io/cypress/issues/7552
+  "include": ["src", "node_modules/cypress"],
+  "exclude": ["node_modules/cypress"],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

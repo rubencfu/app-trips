@@ -22,6 +22,10 @@ export class HttpGetTripQueryHandler extends createQueryHandler(GetTripQuery) {
         this.http.get<Trip>(`${environment.SERVER}/v1/trips/${tripId}`)
       );
 
+      // Why is backend not throwing 404?
+      if (!trip) {
+        throw new NotFoundError();
+      }
       return { trip };
     } catch (error: unknown) {
       if (error instanceof HttpErrorResponse) {

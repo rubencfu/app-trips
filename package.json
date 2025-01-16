@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:app-trips": "node dist/app-trips/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
